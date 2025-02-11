@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day5 Docs Image Gallery</title>
+  <style>
+    /* Resetting styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f4f8fb;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      color: #333;
+    }
+
+    .gallery-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      transition: transform 0.4s, box-shadow 0.4s;
+      cursor: pointer;
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 15px;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .card:hover img {
+      transform: scale(1.1);
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      max-width: 600px;
+      width: 90%;
+      background: #ffffff;
+      border-radius: 15px;
+      padding: 20px;
+      position: relative;
+      text-align: center;
+      animation: fadeIn 0.5s;
+    }
+
+    .modal-content img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      color: #333;
+      cursor: pointer;
+    }
+
+    /* Back Button */
+    .back-btn {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #0078d7;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 16px;
+      text-align: center;
+      display: inline-block;
+    }
+
+    .back-btn:hover {
+      background-color: #005fa3;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="gallery-container">
+    <div class="card" onclick="openModal('/storage/emulated/0/VScode/IMG_20250117_094853.jpg')">
+      <img src="/storage/emulated/0/VScode/IMG_20250117_094853.jpg" alt="Image 1">
+    </div>
+    <div class="card" onclick="openModal('/storage/emulated/0/VScode/Messenger_creation_B23D9174-7056-43F4-9DA5-42EAF233A991.jpeg')">
+      <img src="/storage/emulated/0/VScode/Messenger_creation_B23D9174-7056-43F4-9DA5-42EAF233A991.jpeg" alt="Image 2">
+    </div>
+    <div class="card" onclick="openModal('/storage/emulated/0/VScode/Messenger_creation_CE56B547-A611-4844-A4A1-769129E83A54.jpeg')">
+      <img src="/storage/emulated/0/VScode/Messenger_creation_CE56B547-A611-4844-A4A1-769129E83A54.jpeg" alt="Image 3">
+    </div>
+    <div class="card" onclick="openModal('/storage/emulated/0/VScode/Messenger_creation_C34EF644-88C4-4219-9927-89129324F5BF.jpeg')">
+      <img src="/storage/emulated/0/VScode/Messenger_creation_C34EF644-88C4-4219-9927-89129324F5BF.jpeg" alt="Image 4">
+    </div>
+    <div class="card" onclick="openModal('/storage/emulated/0/VScode/Messenger_creation_CA1D6853-B043-4742-8ACA-1F854B3EE930.jpeg')">
+      <img src="/storage/emulated/0/VScode/Messenger_creation_CA1D6853-B043-4742-8ACA-1F854B3EE930.jpeg" alt="Image 5">
+    </div>
+    <div class="card" onclick="openModal('/storage/emulated/0/VScode/IMG_20250117_162718.jpg')">
+      <img src="/storage/emulated/0/VScode/IMG_20250117_162718.jpg" alt="Image 6">
+    </div>
+    <div class="card" onclick="openModal('/storage/emulated/0/VScode/IMG_20250117_152416.jpg')">
+      <img src="/storage/emulated/0/VScode/IMG_20250117_152416.jpg" alt="Image 7">
+    </div>
+    <div class="card" onclick="openModal('/storage/emulated/0/VScode/IMG_20250117_135039.jpg')">
+      <img src="/storage/emulated/0/VScode/IMG_20250117_135039.jpg" alt="Image 8">
+    </div>
+    <div class="card" onclick="openModal('/storage/emulated/0/VScode/IMG_20250117_133806.jpg')">
+      <img src="/storage/emulated/0/VScode/IMG_20250117_133806.jpg" alt="Image 9">
+    </div>
+    <div class="card" onclick="openModal('/storage/emulated/0/VScode/IMG_20250117_100327.jpg')">
+      <img src="/storage/emulated/0/VScode/IMG_20250117_100327.jpg" alt="Image 10">
+    </div>
+  </div>
+
+  <a href="waley.html" class="back-btn">Back</a>
+
+  <!-- Modal -->
+  <div class="modal" id="imageModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <img id="modalImage" src="" alt="Zoomed Image">
+    </div>
+  </div>
+
+  <script>
+    function openModal(imageUrl) {
+      document.getElementById('imageModal').style.display = 'flex';
+      document.getElementById('modalImage').src = imageUrl;
+    }
+
+    function closeModal() {
+      document.getElementById('imageModal').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>

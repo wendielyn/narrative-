@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day1 Docs Image Gallery</title>
+  <style>
+    /* Resetting styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f4f8fb;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+      padding: 20px;
+      color: #333;
+    }
+
+    .gallery-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      transition: transform 0.4s, box-shadow 0.4s;
+      cursor: pointer;
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 15px;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .card:hover img {
+      transform: scale(1.1);
+    }
+
+    .card-description {
+      padding: 15px;
+      background: #ffffff;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #444;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      max-width: 600px;
+      width: 90%;
+      background: #ffffff;
+      border-radius: 15px;
+      padding: 20px;
+      position: relative;
+      text-align: center;
+      animation: fadeIn 0.5s;
+    }
+
+    .modal-content img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .modal-description {
+      margin-top: 10px;
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      color: #333;
+      cursor: pointer;
+    }
+
+    /* Back Button Styles */
+    .back-btn {
+      margin-top: 30px;
+      padding: 12px 25px;
+      background-color: #0078d7;
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .back-btn:hover {
+      background-color: #005fa3;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="gallery-container">
+    <div class="card" onclick="openModal('Cleaning the office for better work place', '/storage/emulated/0/VScode/Messenger_creation_83BD60B9-AD60-43E9-A178-ADF2098C09CA.jpeg')">
+      <img src="/storage/emulated/0/VScode/Messenger_creation_83BD60B9-AD60-43E9-A178-ADF2098C09CA.jpeg" alt="Cleaning">
+      <div class="card-description">Cleaning</div>
+    </div>
+    <div class="card" onclick="openModal('Arranging documents to be organized', '/storage/emulated/0/VScode/Messenger_creation_9CAEDA13-E044-46AA-A772-6AAD002234AD.jpeg')">
+      <img src="/storage/emulated/0/VScode/Messenger_creation_9CAEDA13-E044-46AA-A772-6AAD002234AD.jpeg" alt="Organizing">
+      <div class="card-description">Organizing</div>
+    </div>
+    <div class="card" onclick="openModal('Our last work for day 1', '/storage/emulated/0/Pictures/Messenger/Messenger_creation_604085D3-8ED3-4E7E-B7B4-61298A020E23.jpeg')">
+      <img src="/storage/emulated/0/Pictures/Messenger/Messenger_creation_604085D3-8ED3-4E7E-B7B4-61298A020E23.jpeg" alt="Recording">
+      <div class="card-description">Recording</div>
+    </div>
+  </div>
+
+  <a href="about.html" class="back-btn">Back</a>
+
+  <!-- Modal -->
+  <div class="modal" id="imageModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <img id="modalImage" src="" alt="Zoomed Image">
+      <div id="modalDescription" class="modal-description"></div>
+    </div>
+  </div>
+
+  <script>
+    function openModal(description, imageUrl) {
+      document.getElementById('imageModal').style.display = 'flex';
+      document.getElementById('modalImage').src = imageUrl;
+      document.getElementById('modalDescription').innerText = description;
+    }
+
+    function closeModal() {
+      document.getElementById('imageModal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

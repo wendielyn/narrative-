@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Gallery with Modal</title>
+  <style>
+    /* Resetting styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: rgb(240, 240, 240);
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .title {
+      font-size: 32px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      width: 90%;
+    }
+
+    .picture {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .picture img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.4s ease-in-out;
+    }
+
+    .picture:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .picture:hover img {
+      transform: scale(1.1);
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      max-width: 600px;
+      width: 90%;
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      position: relative;
+      text-align: center;
+    }
+
+    .modal-content img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      color: #333;
+      cursor: pointer;
+    }
+
+    /* Back Button */
+    .back-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #0078d7;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .back-btn:hover {
+      background-color: #005fa3;
+    }
+  </style>
+</head>
+<body>
+  <div class="title">Image Gallery</div>
+
+  <div class="gallery">
+    <div class="picture" onclick="openModal('/storage/emulated/0/VScode/Messenger_creation_926456E8-FEEF-4646-98D4-06D6F6712508.jpeg')">
+      <img src="/storage/emulated/0/VScode/Messenger_creation_926456E8-FEEF-4646-98D4-06D6F6712508.jpeg" alt="Image 1">
+    </div>
+
+    <div class="picture" onclick="openModal('/storage/emulated/0/VScode/Messenger_creation_AC427061-1B89-4B69-AC86-B0BF841200F8.jpeg')">
+      <img src="/storage/emulated/0/VScode/Messenger_creation_AC427061-1B89-4B69-AC86-B0BF841200F8.jpeg" alt="Image 2">
+    </div>
+
+    <div class="picture" onclick="openModal('/storage/emulated/0/VScode/Messenger_creation_296E299B-D0DB-4261-AB11-C488441F37AF.jpeg')">
+      <img src="/storage/emulated/0/VScode/Messenger_creation_296E299B-D0DB-4261-AB11-C488441F37AF.jpeg" alt="Image 3">
+    </div>
+
+    <div class="picture" onclick="openModal('/storage/emulated/0/VScode/Messenger_creation_9C4341FC-9E29-423D-843C-04DC65D83B44.jpeg')">
+      <img src="/storage/emulated/0/VScode/Messenger_creation_9C4341FC-9E29-423D-843C-04DC65D83B44.jpeg" alt="Image 4">
+    </div>
+
+    <div class="picture" onclick="openModal('/storage/emulated/0/VScode/IMG_20250114_150821.jpg')">
+      <img src="/storage/emulated/0/VScode/IMG_20250114_150821.jpg" alt="Image 5">
+    </div>
+
+    <div class="picture" onclick="openModal('/storage/emulated/0/VScode/IMG_20250114_104641.jpg')">
+      <img src="/storage/emulated/0/VScode/IMG_20250114_104641.jpg" alt="Image 6">
+    </div>
+  </div>
+
+  <a href="about.html" class="back-btn">Back</a>
+
+  <!-- Modal -->
+  <div class="modal" id="imageModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <img id="modalImage" src="" alt="Zoomed Image">
+    </div>
+  </div>
+
+  <script>
+    function openModal(imageUrl) {
+      document.getElementById('imageModal').style.display = 'flex';
+      document.getElementById('modalImage').src = imageUrl;
+    }
+
+    function closeModal() {
+      document.getElementById('imageModal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
